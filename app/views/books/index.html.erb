@@ -1,29 +1,22 @@
-<h1>Listing books</h1>
+<div class="page-header">
+  <h1>What We've Been Reading</h1>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Notes</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= link_to "List a New Book", new_book_path, class: "btn btn-success" %>
 
 <% @books.each do |book| %>
-  <tr>
-    <td><%= book.name %></td>
-    <td><%= book.title %></td>
-    <td><%= book.author %></td>
-    <td><%= book.notes %></td>
-    <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
-    <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <div class="book">
+    <strong><%=book.name %></strong>
+    <p>I read <strong><%=book.title %></strong> by <em><%=book.author %></em>
+    <p><%=book.notes %></p>
+    <div class="meta">
+      <%= link_to book.created_at.to_formatted_s(:short),  book %>  
+      <span class="admin">
+        |  <%= link_to "Edit", edit_book_path(book) %> | 
+        <%= link_to "Delete", book, method: :delete, data: { confirm: "Are you sure you want to delete this book?"} %>
+
+      </span> 
+    </div>
+  </div>
+
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Book', new_book_path %>
