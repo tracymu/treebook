@@ -1,6 +1,8 @@
 Tracecode::Application.routes.draw do
-  resources :books
+  devise_for :users
 
+  resources :books
+  root to: 'books#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
